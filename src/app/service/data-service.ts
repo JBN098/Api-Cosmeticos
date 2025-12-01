@@ -23,12 +23,12 @@ getCosmeticoByName(cosmetico: Cosmetico): Observable<any>{
     return this.http.get<any>(this.urlBase +'cosmeticoByName/'+cosmetico.name);
 }
 
-postCosmetico(cosmetico: Cosmetico): Observable<any>{
+postCosmetico(cosmetico: Cosmetico): Observable<ApiResponseCRUDCosmetico>{
     return this.http.post<any>(this.urlBase + 'addOne', cosmetico);
 
 }
 
-patchCosmetico(cosmetico: Cosmetico): Observable<any>{
+patchCosmetico(cosmetico: Cosmetico): Observable<ApiResponseCRUDCosmetico>{
     return this.http.patch<any>(this.urlBase + 'updateOne/'+cosmetico._id, cosmetico);
 }
 
