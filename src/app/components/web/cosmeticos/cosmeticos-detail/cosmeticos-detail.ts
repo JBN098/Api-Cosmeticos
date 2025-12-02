@@ -7,6 +7,7 @@ import {CurrencyPipe} from '@angular/common';
 import {faEdit, faTrash, faTrashCan} from '@fortawesome/free-solid-svg-icons';
 import {Router} from '@angular/router';
 import {NgbToast} from '@ng-bootstrap/ng-bootstrap';
+import {FormValidators} from '../../../../../validators/FormValidators';
 
 @Component({
   selector: 'app-cosmeticos-detail',
@@ -24,13 +25,15 @@ export class CosmeticosDetail implements OnInit {
 loaded = false;
 private readonly formBuilder: FormBuilder = inject(FormBuilder);
 private readonly dataService: DataService = inject(DataService);
+forbiddenWords: string[] = ['drug', 'drugs', 'sex', 'moron', 'idiot', 'bitch'];
 formCosmetico: FormGroup = this.formBuilder.group({
   _id: [''],
-  name: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(5)]],
-  image: [''],
-  type: [''],
-  brand: [''],
-  price: [0]
+  name: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(5), FormValidators.notOnlyWhiteSpace,
+  FormValidators.forbiddenWord(this.forbiddenWords)]],
+  image: ['', [Validators.required, Validators.minLength(7)]],
+  type: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(20),FormValidators.forbiddenWord(this.forbiddenWords)]],
+  brand: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), FormValidators.forbiddenWord(this.forbiddenWords)]],
+  price: [0, [Validators.required, Validators.min(0.01)]]
 });
   toast: Toast ={
     text: '',
@@ -88,6 +91,10 @@ ngOnInit() {
   protected readonly onsubmit = onsubmit;
 
   onSubmit() {
+    if(this.formCosmetico.invalid) {
+      this.formCosmetico.markAllAsTouched();
+      return;
+    }
     if (this.formCosmetico.invalid) {
       this.formCosmetico.markAsTouched();
       return;

@@ -11,11 +11,16 @@ export class FormValidators {
       }
 
   }
-  static forbiddenWord (word: string): ValidationErrors | null {
-    return(control: FormControl): ValidationErrors | null => {
-      const forbidden = new RegExp(word, "i").test(control.value);
-      return forbidden ? {forbiddenWord: true} : null;
 
+  static forbiddenWord(word: string[]): ValidationErrors | null {
+    return (control: FormControl): ValidationErrors | null =>{
+    let result=null;
+    word.forEach(p => {
+      const regExp =new RegExp(p, "i")
+      const forbidden = regExp.test(control.value);
+     if (forbidden) result = {forbiddenWord: {value: control.value}};
+    })
+      return result;
     }
   }
 

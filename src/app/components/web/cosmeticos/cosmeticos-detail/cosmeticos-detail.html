@@ -6,34 +6,144 @@
       <div class="col-md-6">
         <form [formGroup]="formCosmetico" (ngSubmit)="onSubmit()">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control"
+            <input type="text" class="form-control" [class.is-invalid]="name.touched && name.invalid" [class.is-valid] = "name.valid"
                    id="name" placeholder="Name"
                    formControlName="name">
             <label for="name">Nombre: </label>
+            @if (name.invalid && (name.dirty || name.touched)){
+              @if (name.errors ['required']){
+                  <div class=" invalid feedback is-invalid">
+                    Nombre es obligatorio
+                  </div>
+                }
+              @if (name.errors ['maxlength']){
+                  <div class=" invalid feedback is-invalid">
+                    Nombre tiene un tamaño máximo de 50 carácteres
+                  </div>
+                }
+              @if (name.errors ['minlength']){
+                  <div class=" invalid feedback is-invalid">
+                    Nombre tiene un tamaño minimo de 5 carácteres
+                  </div>
+                }
+              @if (name.errors ['notOnlyWhiteSpace']){
+                  <div class=" invalid feedback is-invalid">
+                    Se debe rellenar el campo, no vale espacios en blanco
+                  </div>
+                }
+              @if (name.errors ['forbiddenWords']){
+                  <div class=" invalid feedback is-invalid">
+                    No se pueden usar palabras malsonantes
+                  </div>
+                }
+            }
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control"
+            <input type="text" class="form-control" [class.is-invalid]="name.touched && name.invalid" [class.is-valid] = "name.valid"
                    id="type" placeholder="Categoria"
                    formControlName="type">
             <label for="type">Categoría: </label>
+            @if (type.invalid && (type.dirty || type.touched)){
+              @if (type.errors ['required']){
+                <div class=" invalid feedback is-invalid">
+                  Categoría es obligatorio
+                </div>
+              }
+              @if (type.errors ['maxlength']){
+                <div class=" invalid feedback is-invalid">
+                  Categoría tiene un tamaño máximo de 20 carácteres
+                </div>
+              }
+              @if (type.errors ['minlength']){
+                <div class=" invalid feedback is-invalid">
+                  Categoría tiene un tamaño minimo de 3 carácteres
+                </div>
+              }
+              @if (type.errors ['notOnlyWhiteSpace']){
+                <div class=" invalid feedback is-invalid">
+                  Se debe rellenar el campo, no vale espacios en blanco
+                </div>
+              }
+              @if (type.errors ['forbiddenWords']){
+                <div class=" invalid feedback is-invalid">
+                  No se pueden usar palabras malsonantes
+                </div>
+              }
+            }
+
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control"
+            <input type="text" class="form-control" [class.is-invalid]="name.touched && name.invalid" [class.is-valid] = "name.valid"
                    id="brand" placeholder="Marca"
                    formControlName="brand">
-            <label for="">Marca:</label>
+            <label for="brand">Marca:</label>
+
+            @if (brand.invalid && (brand.dirty || brand.touched)){
+              @if (brand.errors ['required']){
+                <div class=" invalid feedback is-invalid">
+                  Marca es obligatorio
+                </div>
+              }
+              @if (brand.errors ['maxlength']){
+                <div class=" invalid feedback is-invalid">
+                  Marca tiene un tamaño máximo de 30 carácteres
+                </div>
+              }
+              @if (brand.errors ['minlength']){
+                <div class=" invalid feedback is-invalid">
+                  Marca tiene un tamaño minimo de 2 carácteres
+                </div>
+              }
+              @if (brand.errors ['notOnlyWhiteSpace']){
+                <div class=" invalid feedback is-invalid">
+                  Se debe rellenar el campo, no vale espacios en blanco
+                </div>
+              }
+              @if (brand.errors ['forbiddenWords']){
+                <div class=" invalid feedback is-invalid">
+                  No se pueden usar palabras malsonantes
+                </div>
+              }
+            }
+
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control"
+            <input type="text" class="form-control" [class.is-invalid]="name.touched && name.invalid" [class.is-valid] = "name.valid"
                    id="price" placeholder="Precio"
                    formControlName="price">
             <label for="">Precio:</label>
+
+            @if (price.invalid && (price.dirty || price.touched)){
+              @if (price.errors ['required']){
+                <div class=" invalid feedback is-invalid">
+                  Precio es obligatorio
+                </div>
+              }
+              @if (price.errors ['min']){
+                <div class=" invalid feedback is-invalid">
+                  Debes poner un precio mayor a 0 a menos que lo quieras regalar...
+                </div>
+              }
+            }
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control"
+            <input type="text" class="form-control" [class.is-invalid]="name.touched && name.invalid" [class.is-valid] = "name.valid"
                    id="image" placeholder="Imagen"
                    formControlName="image">
             <label for="">Imagen: </label>
+
+            @if (image.invalid && (image.dirty || image.touched)){
+              @if (image.errors ['required']){
+                <div class=" invalid feedback is-invalid">
+                  Imagen es obligatorio
+                </div>
+              }
+              @if (image.errors ['minlength']){
+                <div class=" invalid feedback is-invalid">
+                  Imagen tiene un tamaño minimo de 7 carácteres
+                </div>
+              }
+            }
           </div>
 
           <div class="row justify-content-end">
