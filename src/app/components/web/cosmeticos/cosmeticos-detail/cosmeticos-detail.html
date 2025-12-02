@@ -1,0 +1,91 @@
+@if(loaded){
+    <div class="row my-3">
+      <div class="div col-12 my-2">
+        <h2 class="text-center text-secondary">{{idCosmetico?'EDITANDO '+ name.value : 'NUEVO COSMETICO '}}</h2>
+      </div>
+      <div class="col-md-6">
+        <form [formGroup]="formCosmetico" (ngSubmit)="onSubmit()">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control"
+                   id="name" placeholder="Name"
+                   formControlName="name">
+            <label for="name">Nombre: </label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control"
+                   id="type" placeholder="Categoria"
+                   formControlName="type">
+            <label for="type">Categoría: </label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control"
+                   id="brand" placeholder="Marca"
+                   formControlName="brand">
+            <label for="">Marca:</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control"
+                   id="price" placeholder="Precio"
+                   formControlName="price">
+            <label for="">Precio:</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control"
+                   id="image" placeholder="Imagen"
+                   formControlName="image">
+            <label for="">Imagen: </label>
+          </div>
+
+          <div class="row justify-content-end">
+            <div class="col-2">
+              <button class="btn btn-outline-success"
+                      [disabled]="formCosmetico.invalid"
+                      type="submit"
+              >ENVIAR
+              </button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="col-md-4 offset-2">
+        <div class="card shadow">
+          <div class="card-header bg-light-subtle">
+            <h5 class="card-title text-capitalize">{{name.value? name.value : 'Nombre del cosmético'}}</h5>
+          </div>
+          <img [src]="image.value? image.value : '/images/no-imagen.jpg'" [alt]="name.value" class="card-img-top">
+          <div class="card-body">
+            <p class="badge bg-primary">{{ type.value? type.value : 'Categoría' }}</p>
+            <p><strong>Marca: </strong><span class="text-primary">{{ brand.value? brand.value : 0 }}</span></p>
+          </div>
+          <div class="card-footer d-flex justify-content-between">
+            @if (price.value){
+              <p>{{ price.value | currency: 'EUR' }}</p>
+            } @else {
+              <p>{{ 0 | currency: 'EUR' }}</p>
+            }
+            <h4>
+              <fa-icon  [icon]="faEdit" class="text-primary"></fa-icon>
+              <fa-icon  [icon]="faTrashCan" class="text-danger"></fa-icon>
+            </h4>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  @if (show){
+    <ngb-toast
+      class="'toast-container position-fixed top-0 end-0 p-3', style: 'z-index: 1200'"
+      [autohide]="true"
+      [delay]="1000"
+      [class]="toast.className">{{toast.text}}</ngb-toast>
+  }
+
+  }  @else {
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  }

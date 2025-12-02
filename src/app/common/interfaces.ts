@@ -24,3 +24,7 @@ export interface Info {
 export interface ApiResponseCRUDCosmetico{
   message: string
 }
+export interface Toast{
+  text: string,
+  className: string,
+}
